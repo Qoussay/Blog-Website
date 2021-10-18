@@ -121,6 +121,10 @@ body>.container.main {
     display: inline;
 }
 
+.fas {
+    font-size: 1.7rem;
+}
+
 /*
 .nav-container {
     padding: 2% 10%;
