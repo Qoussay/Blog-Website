@@ -45,7 +45,17 @@ app.get('/compose' , (req,res) => {
     res.render('compose');
 });
 
+app.get('/posts/:postTitle', (req,res) => {
+    const requested_post = req.params.postTitle.toLowerCase();
+    
+    entries.forEach( (entry) => {
+        const stored_post = entry.title.toLowerCase();
 
+        if (requested_post == stored_post) {
+            res.render('post', {title:stored_post, content:entry.entry_body});
+        }
+    })
+})
 
 // Initialize the local server 
 app.listen(process.env.PORT || 8080, () =>
