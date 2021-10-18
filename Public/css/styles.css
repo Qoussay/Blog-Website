@@ -1,27 +1,114 @@
 html,
 body {
     margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
 body {
-    background-color: #EEEEEE;
+    background-color: #D8E3E7;
 }
 
 .navbar {
     background-color: #00ADB5 !important;
 }
 
+.nav-link {
+    margin: 0 5%;
+    white-space: nowrap;
+    color: #D8E3E7 !important;
+}
+
+button.navbar-toggler {
+    border-color: #D8E3E7;
+}
+
+.navbar-toggler-icon {
+    background-image: url('../images/hamburger_icon.png');
+    filter: invert(99%) sepia(57%) saturate(556%) hue-rotate(170deg) brightness(96%) contrast(89%);
+}
+
+.navbar-brand {
+    color: #D8E3E7 !important;
+    font-size: 2.5rem;
+    padding: 0%;
+    font-family: 'Indie Flower', cursive;
+    font-weight: bolder;
+    margin: 0;
+}
+
+.ms-auto {
+    margin-left: 60% !important;
+}
+
+a.nav-link {
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.1rem;
+}
+
+a.nav-link:hover {
+    color: white !important;
+}
+
+.nav-item {
+    margin: 0 5%;
+}
+
+.navbar>.container-fluid {
+    margin: 1% 10%;
+}
+
+body>.container.main {
+    font-family: 'Comfortaa', cursive;
+    color: #393E46;
+    background-color: #EEEEEE;
+    border-radius: 20px;
+    margin-top: 1%;
+}
+
+.container.main>h1 {
+    margin: 1% 0 2%;
+    border-bottom: 1px solid #393E46;
+}
+
+.form-control {
+    margin-bottom: 1%;
+}
+
+.form-control:focus {
+
+    border-color: #00ADB5;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #00ADB5;
+    outline: 0 none;
+}
+
+
+
+.btn {
+    margin-bottom: 1%;
+    background-color: #00ADB5 !important;
+    color: #D8E3E7;
+    border-color: #D8E3E7;
+}
+
+.btn:hover {
+    background-color: #393E46 !important;
+    color: #D8E3E7;
+    border-color: #D8E3E7;
+}
+
+/*
 .nav-container {
-    padding: 2% 3%;
+    padding: 2% 10%;
     font-size: 1.3rem;
 }
 
 .navbar-brand {
-    font-size: 2rem;
-    padding: 0%;
-}
-
-.navbar-brand,
-.nav-link {
     color: #222831 !important;
 }
+*/
+
+
+/* .navbar-nav {
+    width: 40%;
+} */
