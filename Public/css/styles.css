@@ -58,6 +58,11 @@ a.nav-link:hover {
     margin: 1% 10%;
 }
 
+footer>.container {
+    border-top: 1px solid #393E46;
+    padding-top: 1%;
+}
+
 body>.container.main {
     font-family: 'Comfortaa', cursive;
     color: #393E46;
