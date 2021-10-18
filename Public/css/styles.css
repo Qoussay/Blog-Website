@@ -102,6 +102,25 @@ body>.container.main {
     border-color: #D8E3E7;
 }
 
+.blog-entry {
+    margin: 5% 0;
+}
+
+.blog-entry>h2 {
+    width: fit-content;
+    font-style: italic;
+    border-bottom: 1px solid #393E46;
+}
+
+.blog-entry>p {
+    display: inline;
+}
+
+.readmore {
+    color: #00ADB5;
+    display: inline;
+}
+
 /*
 .nav-container {
     padding: 2% 10%;
