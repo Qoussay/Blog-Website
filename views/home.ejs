@@ -3,12 +3,19 @@
 <h1>Home</h1>
 <p><%= homeStartingContent %> </p>
 
-<% for(let i=0; i<entries.length; i++) { %>
+<% entries.forEach( (entry) => {%>
 <div class="blog-entry">
-    <h2><%= entries[i].title %> </h2>
-    <p><%= entries[i].entry_body %> </p>
+    <h2><%= entry.title %> </h2>
+
+    <% if (entry.entry_body.length < 100) { %>
+    <p><%= entry.entry_body %></p>
+    <% } else {  %>
+    <p><%= entry.entry_body.substring(0, 100) + " ..."%></p>
+    <a href="/posts/<%=entry.title%>">Read More</a>
+    <% } %>
+
 </div>
 
-<% } %>
+<% }); %>
 
 <%- include('partials/footer') %>

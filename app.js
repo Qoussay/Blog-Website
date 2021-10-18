@@ -45,6 +45,8 @@ app.get('/compose' , (req,res) => {
     res.render('compose');
 });
 
+
+
 // Initialize the local server 
 app.listen(process.env.PORT || 8080, () =>
     console.log('Server is running on http://localhost:8080/')
