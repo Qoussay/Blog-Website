@@ -7,11 +7,11 @@
 <div class="blog-entry">
     <h2><%= entry.title %> </h2>
 
-    <% if (entry.entry_body.length < 100) { %>
-    <p><%= entry.entry_body %></p>
+    <% if (entry.body.length < 100) { %>
+    <p><%= entry.body %></p>
     <% } else {  %>
-    <p><%= entry.entry_body.substring(0, 100) + " ..."%></p>
-    <a href="/posts/<%=entry.title%>">Read More</a>
+    <p><%= entry.body.substring(0, 100) + " ..."%></p>
+    <a href="/posts/<%=entry._id%>">Read More</a>
     <% } %>
 
 </div>

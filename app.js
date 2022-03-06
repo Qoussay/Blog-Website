@@ -1,8 +1,12 @@
 // Initialize express 
 const express = require('express');
+const mongoose = require('mongoose');
 
 // initialize app
 const app = express();
+
+// connect to mongoose server
+mongoose.connect("mongodb+srv://admin-q:akkari619@cluster0.y18nt.mongodb.net/blogCollection?retryWrites=true&w=majority");
 
 // Set ejs as the main view engine 
 app.set('view engine', 'ejs');
@@ -11,50 +15,71 @@ app.set('view engine', 'ejs');
 app.use(express.static('Public'));
 app.use(express.urlencoded());
 
+//initialize mongoose schema and model
+const blogSchema = new mongoose.Schema({
+    title: String,
+    body: String,
+})
 
-const homeStartingContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-const aboutContent  ='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-const contactContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+const Blog = mongoose.model('Blog', blogSchema);
 
-const entries = [];
+//
+const StartingContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
-app.get('/' , (req,res) => {
-    res.render('home', {homeStartingContent: homeStartingContent, entries:entries});
+
+app.get('/', (req, res) => {
+    Blog.find({}, function (err, itemsFound) {
+        if (!err) {
+            res.render('home', { homeStartingContent: StartingContent, entries: itemsFound });
+        }
+    })
 });
 
-app.post('/', (req,res) => {
-    const entry = {
-        title: req.body.entry_title,
-        entry_body: req.body.entry_body
-    };
+app.post('/', (req, res) => {
+    const blogTitle = req.body.entry_title;
+    const blogbody = req.body.entry_body;
 
-    entries.push(entry);
+    const blog = new Blog({
+        title: blogTitle,
+        body: blogbody
+    });
+
+    blog.save();
 
     res.redirect('/');
 })
 
-app.get('/about' , (req,res) => {
-    res.render('about', {aboutContent: aboutContent});
+app.get('/about', (req, res) => {
+    res.render('about', { aboutContent: StartingContent });
 });
 
-app.get('/contact' , (req,res) => {
-    res.render('contact', {contactContent: contactContent});
+app.get('/contact', (req, res) => {
+    res.render('contact', { contactContent: StartingContent });
 });
 
-app.get('/compose' , (req,res) => {
+app.get('/compose', (req, res) => {
     res.render('compose');
 });
 
-app.get('/posts/:postTitle', (req,res) => {
-    const requested_post = req.params.postTitle.toLowerCase();
-    
-    entries.forEach( (entry) => {
-        const stored_post = entry.title.toLowerCase();
+app.get('/posts/:postId', (req, res) => {
+    const requestedBlogId = req.params.postId;
+    console.log(requestedBlogId);
 
-        if (requested_post == stored_post) {
-            res.render('post', {title:stored_post, content:entry.entry_body});
+    Blog.findOne({ _id: requestedBlogId }, function (err, foundBlog) {
+        if (!err) {
+            res.render('post', { title: foundBlog.title, content: foundBlog.body });
         }
+        else
+            console.log(err);
     })
+
+    // entries.forEach((entry) => {
+    //     const stored_post = entry.title.toLowerCase();
+
+    //     if (requested_post == stored_post) {
+
+    //     }
+    // })
 })
 
 // Initialize the local server 
